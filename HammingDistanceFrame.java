@@ -41,11 +41,10 @@ import javax.swing.event.ChangeListener;
 
 public class HammingDistanceFrame extends JFrame {
 
-	JPanel creativePanel = new JPanel(new GridBagLayout());  
-	JButton remove = new JButton("Remove");
-	
 	
 	JPanel panel = new JPanel(new GridBagLayout());  
+	
+	
 	int[] Distance = new int[5];
 	
 	HashMap<Integer, ArrayList<String>> stationsbhd = new HashMap<Integer, ArrayList<String>>();
@@ -77,9 +76,13 @@ public class HammingDistanceFrame extends JFrame {
 	JLabel d3 = new JLabel("Distance 3");
 	JLabel d4 = new JLabel("Distance 4");
 	
+	JTextField rmst = new JTextField(20);
+	
 	ArrayList<JLabel> distLabel = new ArrayList<>(5);
 	
-	
+	JLabel remo = new JLabel("Enter Station To Be Removed");
+	JButton removeStation = new JButton("Remove Station");
+	JTextArea removedStations = new JTextArea(20,20);
 	
 	
 	//all the 3 buttons
@@ -103,8 +106,34 @@ public class HammingDistanceFrame extends JFrame {
     	
 	}
 	
+	private final class DrawPanel extends JPanel   {
+		
+		/*public DrawPanel(GridBagLayout gridBagLayout) {
+			JPanel jp = new JPanel(gridBagLayout);
+		}*/
+
+		public void paintComponent(Graphics g)   {
+			
+			//super.paintComponents(g);
+			g.setColor(Color.blue);
+			g.fillRect(0,0,4000,10000);
+			g.setColor(Color.white);
+			g.fillRect(300,0, 300, 900);
+			g.setColor(Color.red);
+			g.fillRect(600,0,300, 900);
+			
+			
+			
+		
+	}
+	}
+	
+	
+	DrawPanel flagPanel = new DrawPanel();
+	
 	
 	public HammingDistanceFrame() throws IOException   {
+		
 		slider.addChangeListener(new ChangeListener() {
 
 		@Override
@@ -115,6 +144,7 @@ public class HammingDistanceFrame extends JFrame {
 			hammingDist.setText(sliderVal + ""); 
 							 				
 			}});
+		
 		
 		//setting up the slider
 		slider.setMajorTickSpacing(1);  
@@ -281,14 +311,56 @@ public class HammingDistanceFrame extends JFrame {
 			 
 		 });
 		 
-		/*GridBagConstraints newlayout = new GridBagConstraints();
-		// newlayout.insets = new Insets(10, -100, 1, 10);
-		 newlayout.gridx = 20;
-		 newlayout.gridy = 10;
-		// layoutConst3.gridwidth = 1;
-		 //layoutConst3.fill = GridBagConstraints.HORIZONTAL;
-		 panel.add(remove, newlayout);
+		 /*GridBagConstraints newLayout = new GridBagConstraints();
+		 newLayout.gridx = 10;
+		 newLayout.gridy = 2;
+		// n//ewLayout.insets = new Insets(10, 10, 10, 20);
+		 newLayout.gridwidth = 100;
+		 newLayout.gridheight = 100;
+		newLayout.fill = GridBagConstraints.BOTH;
+		 //newLayout.anchor = GridBagConstraints.LINE_START;
+		 panel.add(flagPanel, newLayout);
 		 add(panel);*/
+		 
+		 GridBagConstraints newLayout1 = new GridBagConstraints();
+		 newLayout1.gridx = 8;
+		 newLayout1.gridy = 1;
+		 panel.add(remo,newLayout1);
+		 add(panel);
+		 
+		 GridBagConstraints newLayout2 = new GridBagConstraints();
+		 newLayout2.gridx = 9;
+		 newLayout2.gridy = 1;
+		 newLayout2.insets = new Insets(10, 10, 10, 10);
+		 panel.add(rmst, newLayout2);
+		 add(panel);
+		 
+		 GridBagConstraints newLayout3 = new GridBagConstraints();
+		 newLayout3.gridx = 8;
+		 newLayout3.gridy = 3;
+		 newLayout3.insets = new Insets(10, 10, 10, 20);
+		 newLayout3.anchor = GridBagConstraints.LINE_START;
+		 panel.add(removeStation, newLayout3);
+		 add(panel);
+		 
+		 GridBagConstraints newLayout4 = new GridBagConstraints();
+		 newLayout4.gridx = 8;
+		 newLayout4.gridy = 5;
+		// newLayout4.insets = new Insets(10, 10, 10, 20);
+		 //newLayout4.anchor = GridBagConstraints.LINE_START;
+		 panel.add(removedStations, newLayout4);
+		 add(panel);
+		 
+		 removeStation.addActionListener((e) -> {
+				String input = rmst.getText();
+				if(((DefaultComboBoxModel)stations.getModel()).getIndexOf(input) == -1) {
+					removedStations.setText("Station Not Found" + "\n" + "Please Check Your Spelling");
+				}
+				else   {
+					stations.removeItem(input);
+					removedStations.setText("The station entered has been removed");
+				}
+		 });
 		 
 		 
 	}
@@ -445,9 +517,9 @@ public class HammingDistanceFrame extends JFrame {
 	
 	public static void main(String []args) throws IOException {  
 		 
-		HammingDistanceFrame frame = new HammingDistanceFrame();  
+		HammingDistanceFrame frame = new HammingDistanceFrame(); 
 		frame.setTitle("Hamming Distance");
-		frame.setSize(1000, 1000);
+		frame.setSize(2000,2000);
 		frame.pack();  
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);  
