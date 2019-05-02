@@ -316,6 +316,8 @@ public class HammingDistanceFrame extends JFrame {
 				dist4.setText(String.valueOf(Distance[4]));
 		 });
 		 
+		 
+		 //Actions to perform when AddStation button is clicked
 		 AddStation.addActionListener((e) -> {
 			 String input = addStationtf.getText();
 			 if(((DefaultComboBoxModel)stations.getModel()).getIndexOf(input) == -1) {
