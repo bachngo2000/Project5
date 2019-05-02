@@ -337,7 +337,7 @@ public class HammingDistanceFrame extends JFrame {
 		 panel.add(flagPanel, newLayout);
 		 add(panel);*/
 		 
-		 //
+		 //position the JLabel "Enter Station To Be Removed"
 		 GridBagConstraints newLayout1 = new GridBagConstraints();
 		 newLayout1.gridx = 8;
 		 newLayout1.gridy = 1;
