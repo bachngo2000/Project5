@@ -23,13 +23,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -87,6 +80,7 @@ public class HammingDistanceFrame extends JFrame {
 	JTextArea removedStations = new JTextArea(20,20);
 	
 	
+	
 	//all the 3 buttons
 	JButton showStation = new JButton("Show Station");
 	JButton CalculateHD = new JButton("Calculate HD");
@@ -110,32 +104,6 @@ public class HammingDistanceFrame extends JFrame {
     	
 	}
 	
-	/*private final class DrawPanel extends JPanel   {
-		
-		/*public DrawPanel(GridBagLayout gridBagLayout) {
-			JPanel jp = new JPanel(gridBagLayout);
-		}
-
-		public void paintComponent(Graphics g)   {
-			
-			//super.paintComponents(g);
-			g.setColor(Color.blue);
-			g.fillRect(0,0,4000,10000);
-			g.setColor(Color.white);
-			g.fillRect(300,0, 300, 900);
-			g.setColor(Color.red);
-			g.fillRect(600,0,300, 900);
-			
-			
-			
-		
-	}
-	}
-	
-	
-	DrawPanel flagPanel = new DrawPanel();*/
-	
-	
 	public HammingDistanceFrame() throws IOException   {
 		
 		slider.addChangeListener(new ChangeListener() {
@@ -148,8 +116,7 @@ public class HammingDistanceFrame extends JFrame {
 			hammingDist.setText(sliderVal + ""); 
 							 				
 			}});
-		
-		
+
 		//setting up the slider
 		slider.setMajorTickSpacing(1);  
 		slider.setPaintTicks(true);  
@@ -183,6 +150,7 @@ public class HammingDistanceFrame extends JFrame {
 		 
 		 //
 		 //hammingDist.setBounds(100,100,100,100);
+		 hammingDist.setEditable(false);
 		 GridBagConstraints layoutConst3 = new GridBagConstraints();
 		 layoutConst3.insets = new Insets(10, -100, 1, 10);
 		 layoutConst3.gridx = 1;
@@ -194,11 +162,14 @@ public class HammingDistanceFrame extends JFrame {
 		
 		//position the JTextArea 
 		 GridBagConstraints layoutConst4 = new GridBagConstraints();
+		 stationsList.setEditable(false);
 		 layoutConst4.gridx = 0;
 		 layoutConst4.gridy = 5;
 		 layoutConst4.insets = new Insets(10, 10, 10, 10);
 		 panel.add(stationsList, layoutConst4);
 		 add(panel);
+		 
+		 
 		 
 		 //position the compareWith JLabel
 		 GridBagConstraints layoutConst5 = new GridBagConstraints();
@@ -253,6 +224,7 @@ public class HammingDistanceFrame extends JFrame {
 		 for (int x = 0; x < distancetf.size(); ++x)   {
 			 GridBagConstraints jTFlayoutConstant = new GridBagConstraints();
 			 distancetf.get(x).setBounds(100,100,100,100);
+			 distancetf.get(x).setEditable(false);
 			 jTFlayoutConstant.gridx = 1;
 			 jTFlayoutConstant.gridy = 11 + 2*x;
 			 jTFlayoutConstant.insets = new Insets(10, -100, 10, 10);
@@ -279,11 +251,18 @@ public class HammingDistanceFrame extends JFrame {
 		 panel.add(addStationtf,layoutConst9);
 		 add(panel);
 		 
+		
+		 GridBagConstraints layoutConst11 = new GridBagConstraints();
+		 layoutConst11.gridx = 0;
+		 layoutConst11.gridy = 5;
+		 JScrollPane scroll = new JScrollPane(stationsList);
+		 scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		 panel.add(scroll,layoutConst11);
+		 add(panel);
+		 
 		 //
 		 read("Mesonet.txt");
 		 stations = new JComboBox(WeatherStations.toArray());
-		 //stations.addActionListener(this);
-		 //position the JComboBox 
 		 GridBagConstraints layoutConst10 = new GridBagConstraints();
 		 layoutConst10.gridx = 1;
 		 layoutConst10.gridy = 7;
@@ -304,12 +283,13 @@ public class HammingDistanceFrame extends JFrame {
 				}
 				stationsList.setText(stations);
 				stationsList.setEditable(false);
+
 			});
 		 
 		 //Actions to perform when CalculateHD button is clicked
 		 CalculateHD.addActionListener((e) -> {
 				String input = stations.getSelectedItem().toString();
-				Distance = calculateNumberOfNodes (input);
+				Distance = calculateNumberOfNodes(input);
 				dist0.setText(String.valueOf(Distance[0]));
 				dist1.setText(String.valueOf(Distance[1]));
 				dist2.setText(String.valueOf(Distance[2]));
@@ -322,21 +302,14 @@ public class HammingDistanceFrame extends JFrame {
 		 AddStation.addActionListener((e) -> {
 			 String input = addStationtf.getText();
 			 if(((DefaultComboBoxModel)stations.getModel()).getIndexOf(input) == -1) { 
-				int index = Collections.binarySearch(WeatherStations, input) * -1 - 1;       
-				 stations.insertItemAt(input, index);
+				//int index = Collections.binarySearch(WeatherStations, input) * -1 - 1;       
+				 //stations.insertItemAt(input, index);
+				 WeatherStations.add(input);
+				 Collections.sort(WeatherStations);
+				 int index = WeatherStations.indexOf(input);
+				 stations.insertItemAt(input,index);
 			 
 		 }});
-		 
-		 /*GridBagConstraints newLayout = new GridBagConstraints();
-		 newLayout.gridx = 10;
-		 newLayout.gridy = 2;
-		// n//ewLayout.insets = new Insets(10, 10, 10, 20);
-		 newLayout.gridwidth = 100;
-		 newLayout.gridheight = 100;
-		newLayout.fill = GridBagConstraints.BOTH;
-		 //newLayout.anchor = GridBagConstraints.LINE_START;
-		 panel.add(flagPanel, newLayout);
-		 add(panel);*/
 		 
 		 //position the JLabel "Enter Station To Be Removed"
 		 GridBagConstraints newLayout1 = new GridBagConstraints();
@@ -372,6 +345,7 @@ public class HammingDistanceFrame extends JFrame {
 		 add(panel);
 		 
 		 //Actions to perform when removeStation button is clicked
+		 removedStations.setEditable(false);
 		 removeStation.addActionListener((e) -> {
 				String input = rmst.getText();
 				if(((DefaultComboBoxModel)stations.getModel()).getIndexOf(input) == -1) {
@@ -438,105 +412,6 @@ public class HammingDistanceFrame extends JFrame {
 		 
 		 return Distance;
 	 }
-	
-	
-	//public void actionPerformed(ActionEvent e) {
-      //  JComboBox cb = (JComboBox)e.getSource();
-        //String stationName = (String)cb.getSelectedItem();
-       
-    //}
-	/* public static class drawFlg extends JPanel {
-			
-			public void paintComponent(Graphics g)   {
-				
-				//super.paintComponents(g);
-				g.setColor(Color.blue);
-				g.fillRect(0,0,300,900);
-				g.setColor(Color.white);
-				g.fillRect(300,0, 300, 900);
-				g.setColor(Color.red);
-				g.fillRect(600,0,300, 900);
-				
-				Graphics2D g2 = (Graphics2D) g;
-				 
-				    double height = super.getSize().getHeight();;
-				    double width = super.getSize().getWidth();
-				 
-				    double rw = .6 * width;
-				    double xc = .4 * width;
-				 
-				    g2.setPaint(Color.BLUE);
-				    g2.fill(new Rectangle2D.Double(0, 0, .4 * width, .53846 * height));
-				 
-				    for (int i = 0; i < 13; i++) {
-				      if (i == 7) {
-				        xc = 0;
-				        rw = width;
-				      }
-				 
-				      if (i % 2 == 0) {
-				        g2.setPaint(Color.RED);
-				      } else {
-				        g2.setPaint(Color.WHITE);
-				      }
-				 
-				      g2.fill(new Rectangle2D.Double(xc, i * .0769 * height, rw, .0769 * height));
-				    }
-				 
-				    double x[] = {
-				      .0002105 * width, .0126 * width, .0163 * width, .02 * width, .0324 * width,
-				      .0217 * width, .02574 * width, .0163 * width, .0069 * width, .0109 * width
-				    };
-				    double y[] = {
-				      .02 * height, .02 * height, 0, .02 * height, .02 * height, 
-				      .03 * height, .05 * height, .04 * height, .05 * height, .03 * height
-				    };
-				 
-				    GeneralPath star = new GeneralPath();
-				 
-				    star.moveTo((float) x[0], (float) y[0]);
-				 
-				    for (int i = 1; i < x.length; i++) {
-				      star.lineTo((float) x[i], (float) y[i]);
-				    }
-				 
-				    star.closePath();
-				 
-				    g2.translate(.017 * width, .0232 * height);
-				    g2.setPaint(Color.WHITE);
-				    g2.fill(star);
-				 
-				    for (int i = 0; i < 5; i++) {
-				      g2.translate(.066316 * width, 0);
-				      g2.fill(star);
-				    }
-				 
-				    for (int i = 0; i < 4; i++) {
-				      g2.translate(-.03316 * width, .054 * height);
-				      g2.fill(star);
-				 
-				      for (int j = 0; j < 4; j++) {
-				        g2.translate(-.066316 * width, 0);
-				        g2.fill(star);
-				      }
-				 
-				      g2.translate(-.03316 * width, .054 * height);
-				      g2.fill(star);
-				 
-				      for (int k = 0; k < 5; k++) {
-				        g2.translate(.066316 * width, 0);
-				        g2.fill(star);
-				      }
-				    }
-				    g.setColor(Color.blue);
-					g.fillRect(0,0,300,900);
-					g.setColor(Color.white);
-					g.fillRect(300,0, 300, 900);
-					g.setColor(Color.red);
-					g.fillRect(600,0,300, 900);
-				
-				 
-			}*/
 		
 	
 	public static void main(String []args) throws IOException {  
