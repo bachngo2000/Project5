@@ -208,7 +208,7 @@ public class HammingDistanceFrame extends JFrame {
 		 panel.add(compareWith, layoutConst5);
 		 add(panel);
 		 
-		 
+		 //position the calculateHD JButton
 		 GridBagConstraints layoutConst6 = new GridBagConstraints();
 		 layoutConst6.gridx = 0;
 		 layoutConst6.gridy = 10;
