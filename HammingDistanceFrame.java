@@ -191,7 +191,7 @@ public class HammingDistanceFrame extends JFrame {
 		 panel.add(hammingDist, layoutConst3);
 		 add(panel);
 		
-		 //
+		//position the JTextArea 
 		 GridBagConstraints layoutConst4 = new GridBagConstraints();
 		 layoutConst4.gridx = 0;
 		 layoutConst4.gridy = 5;
