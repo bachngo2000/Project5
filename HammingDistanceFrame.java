@@ -260,6 +260,7 @@ public class HammingDistanceFrame extends JFrame {
 			 add(panel); 
 		 }
 		 
+		 //position the AddStation JButton 
 		 GridBagConstraints layoutConst8 = new GridBagConstraints();
 		 layoutConst8.gridx = 0;
 		 layoutConst8.gridy = 21;
