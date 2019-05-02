@@ -44,7 +44,7 @@ public class HammingDistanceFrame extends JFrame {
 	//initialize the panel
 	JPanel panel = new JPanel(new GridBagLayout());  
 	
-	
+	//
 	int[] Distance = new int[5];
 	
 	HashMap<Integer, ArrayList<String>> stationsbhd = new HashMap<Integer, ArrayList<String>>();
@@ -94,6 +94,8 @@ public class HammingDistanceFrame extends JFrame {
 	//slider--set value of slider between 1 and 4
 	JSlider slider = new JSlider(1, 4);
 	
+	
+	//method to read in the Mesonet.txt
 	public void read (String Mesonet) throws IOException   {
 		
 		BufferedReader br = new BufferedReader(new FileReader(Mesonet));
