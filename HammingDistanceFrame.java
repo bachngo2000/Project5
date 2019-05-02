@@ -80,6 +80,7 @@ public class HammingDistanceFrame extends JFrame {
 	
 	ArrayList<JLabel> distLabel = new ArrayList<>(5);
 	
+	//JComponents for the creative part
 	JLabel remo = new JLabel("Enter Station To Be Removed");
 	JButton removeStation = new JButton("Remove Station");
 	JTextArea removedStations = new JTextArea(20,20);
@@ -90,7 +91,7 @@ public class HammingDistanceFrame extends JFrame {
 	JButton CalculateHD = new JButton("Calculate HD");
 	JButton AddStation = new JButton("Add Station");
 	
-	//slider
+	//slider--set value of slider between 1 and 4
 	JSlider slider = new JSlider(1, 4);
 	
 	public void read (String Mesonet) throws IOException   {
@@ -204,6 +205,7 @@ public class HammingDistanceFrame extends JFrame {
 		 panel.add(compareWith, layoutConst5);
 		 add(panel);
 		 
+		 
 		 GridBagConstraints layoutConst6 = new GridBagConstraints();
 		 layoutConst6.gridx = 0;
 		 layoutConst6.gridy = 10;
@@ -291,6 +293,7 @@ public class HammingDistanceFrame extends JFrame {
 					stations = stations + stationNames.get(x) + "\n";
 				}
 				stationsList.setText(stations);
+				stationsList.setEditable(false);
 			});
 		 
 		 CalculateHD.addActionListener((e) -> {
@@ -355,10 +358,13 @@ public class HammingDistanceFrame extends JFrame {
 				String input = rmst.getText();
 				if(((DefaultComboBoxModel)stations.getModel()).getIndexOf(input) == -1) {
 					removedStations.setText("Station Not Found" + "\n" + "Please Check Your Spelling");
+					removedStations.setEditable(false);
 				}
 				else   {
 					stations.removeItem(input);
 					removedStations.setText("The station entered has been removed");
+					removedStations.setEditable(false);
+
 				}
 		 });
 		 
@@ -517,6 +523,7 @@ public class HammingDistanceFrame extends JFrame {
 	
 	public static void main(String []args) throws IOException {  
 		 
+		
 		HammingDistanceFrame frame = new HammingDistanceFrame(); 
 		frame.setTitle("Hamming Distance");
 		frame.setSize(2000,2000);
