@@ -337,6 +337,7 @@ public class HammingDistanceFrame extends JFrame {
 		 panel.add(flagPanel, newLayout);
 		 add(panel);*/
 		 
+		 //
 		 GridBagConstraints newLayout1 = new GridBagConstraints();
 		 newLayout1.gridx = 8;
 		 newLayout1.gridy = 1;
@@ -366,6 +367,7 @@ public class HammingDistanceFrame extends JFrame {
 		 panel.add(removedStations, newLayout4);
 		 add(panel);
 		 
+		 //Actions to perform when removeStation button is clicked
 		 removeStation.addActionListener((e) -> {
 				String input = rmst.getText();
 				if(((DefaultComboBoxModel)stations.getModel()).getIndexOf(input) == -1) {
