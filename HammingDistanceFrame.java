@@ -81,7 +81,7 @@ public class HammingDistanceFrame extends JFrame {
 	ArrayList<JLabel> distLabel = new ArrayList<>(5);
 	
 	//JComponents for the creative part
-	JLabel remo = new JLabel("Enter Station To Be Removed");
+	JLabel remo = new JLabel("Enter Station To Be Removed:");
 	JButton removeStation = new JButton("Remove Station");
 	JTextArea removedStations = new JTextArea(20,20);
 	
@@ -336,7 +336,7 @@ public class HammingDistanceFrame extends JFrame {
 		 GridBagConstraints newLayout2 = new GridBagConstraints();
 		 newLayout2.gridx = 9;
 		 newLayout2.gridy = 1;
-		 newLayout2.insets = new Insets(10, 10, 10, 10);
+		 newLayout2.insets = new Insets(10, -15, 1, 10);
 		 panel.add(rmst, newLayout2);
 		 add(panel);
 		 
