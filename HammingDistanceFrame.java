@@ -109,11 +109,11 @@ public class HammingDistanceFrame extends JFrame {
     	
 	}
 	
-	private final class DrawPanel extends JPanel   {
+	/*private final class DrawPanel extends JPanel   {
 		
 		/*public DrawPanel(GridBagLayout gridBagLayout) {
 			JPanel jp = new JPanel(gridBagLayout);
-		}*/
+		}
 
 		public void paintComponent(Graphics g)   {
 			
@@ -132,7 +132,7 @@ public class HammingDistanceFrame extends JFrame {
 	}
 	
 	
-	DrawPanel flagPanel = new DrawPanel();
+	DrawPanel flagPanel = new DrawPanel();*/
 	
 	
 	public HammingDistanceFrame() throws IOException   {
