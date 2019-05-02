@@ -351,6 +351,7 @@ public class HammingDistanceFrame extends JFrame {
 		 panel.add(rmst, newLayout2);
 		 add(panel);
 		 
+		 //position the removeStation button
 		 GridBagConstraints newLayout3 = new GridBagConstraints();
 		 newLayout3.gridx = 8;
 		 newLayout3.gridy = 3;
