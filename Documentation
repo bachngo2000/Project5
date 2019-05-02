@@ -32,16 +32,19 @@ JPanel panel = new JPanel(new GridBagLayout());
   JSlider slider = new Slider(1,4); 
   
   - The read(String Mesonet) method reads in all the stations from "Mesonet.txt" by using a BufferedReader object called br with Mesonet passed as the subparameter of the newFileReader() parameter.  The I created a
-  String called stationIDs to keep track of the lines read in from the file by the BufferedReader br by assigning the lines being read by br to stationIDs.  Then I used the while loop to make sure as long as there is still line  for
-  br to read in (stationIDs != null), I am going to add the string values from stationIDs from index 0 to index 3 to the ArrayList<String> WeatherStations (WeatherStations.add(stationIDs.substring(0,4))).  After I finished reading in all the stations from Mesonet.txt, I closed the
-  BufferedReader using br.close().  
-  - The next method is the public HammingDistanceFrame() method.  For the slider,  I'm going to use ChangeEvent to set the value of the slider to the textfield above it.  First, I called the method addChangeListener on the JSlider: slider.addChangeListener(new ChangeListener()).  Then,
-  I created the method "public void stateChanged(ChangeEvent event)" to tell Eclipse what to do when slider is moved.  I created an int object called sliderVal where I'm gonna get the value from the slider as follows: sliderVal = slider.getValue().  Then I used the setText method to set 
-  that silderVal value to the textfield hammingDist as : hammingDist.setText(sliderVal + "").  Next I used GridBagLayOut() to position all the JComponent objects within the JPanel pane.  For every single JComponent object(JButton, JLabel, JTextField, JTextArea,...), I created a GridBagConstraints
-  object to position each JComponent within the JPanel panel.  In GridBagLayout(), the panel is divided into columns and rows.  The gridbaglayout().gridx method specifies the start column index of the JComponent object and the gridbaglayout().gridy specifies the start row index of that JComponent object. 
-  On the other hand, the gridbaglayout.gridwidth() method specifies the column span and thhe gridbaglayout.gridheight() method specifies the row span of the JComponent object.  The Insets(int top, int left, int bottom, int right) method allows me to leave a small space between the container that holds your components and the window that contains it.
-  The panel.add(JComponent, GridBagConstraints) adds the JComponent object to the JPanel panel and specifies how you want to position it within the panel (GridBagConstraints).  The "add(panel)" adds the panel to the JFrame.  For example:
-        GridBagConstraints layoutConst1 = new GridBagConstraints();
+  String called stationIDs to keep track of the lines read in from the file by the BufferedReader br by assigning the lines being read by br to stationIDs.  Then I used the while loop to make sure as long as there is
+  still line  for br to read in (stationIDs != null), I am going to add the string values from stationIDs from index 0 to index 3 to the ArrayList<String> WeatherStations (WeatherStations.add(stationIDs.substring(0,4))). 
+  After I finished reading in all the stations from Mesonet.txt, I closed the BufferedReader using br.close().  
+  - The next method is the public HammingDistanceFrame() method.  For the slider,  I'm going to use ChangeEvent to set the value of the slider to the textfield above it.  First, I called the method addChangeListener on
+  the JSlider: slider.addChangeListener(new ChangeListener()).  Then,  I created the method "public void stateChanged(ChangeEvent event)" to tell Eclipse what to do when slider is moved.  I created an int object called 
+  sliderVal where I'm gonna get the value from the slider as follows: sliderVal = slider.getValue().  Then I used the setText method to set that silderVal value to the textfield hammingDist as : hammingDist.setText(sliderVal + ""). 
+  Next I used GridBagLayOut() to position all the JComponent objects within the JPanel pane.  For every single JComponent object(JButton, JLabel, JTextField, JTextArea,...), I created a GridBagConstraints  object to position each 
+  JComponent within the JPanel panel.  In GridBagLayout(), the panel is divided into columns and rows.  The gridbaglayout().gridx method specifies the start column index of the JComponent object and the gridbaglayout().gridy specifies
+  the start row index of that JComponent object.  On the other hand, the gridbaglayout.gridwidth() method specifies the column span and thhe gridbaglayout.gridheight() method specifies the row span of the JComponent object.  
+  The Insets(int top, int left, int bottom, int right) method allows me to leave a small space between the container that holds your components and the window that contains it.
+  The panel.add(JComponent, GridBagConstraints) adds the JComponent object to the JPanel panel and specifies how you want to position it within the panel (GridBagConstraints).  The "add(panel)" adds the panel to the JFrame.
+  For example:    
+  GridBagConstraints layoutConst1 = new GridBagConstraints();
         layoutConst1.gridx = 0;
         layoutConst1.gridy = 0;
         layoutConst1.anchor = GridBagConstraints.LINE_START;
