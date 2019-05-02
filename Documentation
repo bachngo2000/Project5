@@ -1,0 +1,78 @@
+- First, I initialized the JPanel, then I created and passed a new GridBagLayout() as the parameter to the JPanel object, which would allow us to use GridBagLayOut() to position the JComponents within the JPanel panel:
+JPanel panel = new JPanel(new GridBagLayout());  
+- Then, I initialized the following JComponets and objects: 
+
+//All the JTextFields needed:
+  JTextField hammingDist = new JTextField(20);
+	JTextField dist0 = new JTextField(10);
+	JTextField dist1 = new JTextField(10);
+	JTextField dist2 = new JTextField(10);
+	JTextField dist3 = new JTextField(10);
+	JTextField dist4 = new JTextField(10);
+	JTextField addStationtf = new JTextField(10);
+  
+  //All the 3 buttons:
+  JButton showStation = new JButton("Show Station");
+	JButton CalculateHD = new JButton("Calculate HD");
+	JButton AddStation = new JButton("Add Station");
+	
+  //All the JLabels:
+  JLabel enterHammingDist = new JLabel("Enter Hamming Dist:");
+	JLabel compareWith = new JLabel("Compare With:");
+	JLabel d0 = new JLabel("Distance 0");
+	JLabel d1 = new JLabel("Distance 1");
+	JLabel d2 = new JLabel("Distance 2");
+	JLabel d3 = new JLabel("Distance 3");
+	JLabel d4 = new JLabel("Distance 4");
+  
+  //the JComboBox -- the dropdown box:
+  JComboBox stations;
+  
+  //JSlider -- set value of slider between 1 and 4
+  JSlider slider = new Slider(1,4); 
+  
+  - The read(String Mesonet) method reads in all the stations from "Mesonet.txt" by using a BufferedReader object called br with Mesonet passed as the subparameter of the newFileReader() parameter.  The I created a
+  String called stationIDs to keep track of the lines read in from the file by the BufferedReader br by assigning the lines being read by br to stationIDs.  Then I used the while loop to make sure as long as there is
+  still line  for br to read in (stationIDs != null), I am going to add the string values from stationIDs from index 0 to index 3 to the ArrayList<String> WeatherStations (WeatherStations.add(stationIDs.substring(0,4))). 
+  After I finished reading in all the stations from Mesonet.txt, I closed the BufferedReader using br.close().  
+  - The next method is the public HammingDistanceFrame() method.  For the slider,  I'm going to use ChangeEvent to set the value of the slider to the textfield above it.  First, I called the method addChangeListener on
+  the JSlider: slider.addChangeListener(new ChangeListener()).  Then,  I created the method "public void stateChanged(ChangeEvent event)" to tell Eclipse what to do when slider is moved.  I created an int object called 
+  sliderVal where I'm gonna get the value from the slider as follows: sliderVal = slider.getValue().  Then I used the setText method to set that silderVal value to the textfield hammingDist as : hammingDist.setText(sliderVal + ""). 
+  Next I used GridBagLayOut() to position all the JComponent objects within the JPanel pane.  For every single JComponent object(JButton, JLabel, JTextField, JTextArea,...), I created a GridBagConstraints  object to position each 
+  JComponent within the JPanel panel.  In GridBagLayout(), the panel is divided into columns and rows.  The gridbaglayout().gridx method specifies the start column index of the JComponent object and the gridbaglayout().gridy specifies
+  the start row index of that JComponent object.  On the other hand, the gridbaglayout.gridwidth() method specifies the column span and thhe gridbaglayout.gridheight() method specifies the row span of the JComponent object.  
+  The Insets(int top, int left, int bottom, int right) method allows me to leave a small space between the container that holds your components and the window that contains it.
+  The panel.add(JComponent, GridBagConstraints) adds the JComponent object to the JPanel panel and specifies how you want to position it within the panel (GridBagConstraints).  The "add(panel)" adds the panel to the JFrame.
+  For example:    
+  GridBagConstraints layoutConst1 = new GridBagConstraints();
+        layoutConst1.gridx = 0;
+        layoutConst1.gridy = 0;
+        layoutConst1.anchor = GridBagConstraints.LINE_START;
+        layoutConst1.insets = new Insets(10, 10, 10, 10);
+        panel.add(enterHammingDist, layoutConst1); 
+        add(panel);
+        
+     The above piece of code is an example of how I position a JComponent object within the JPanel panel.  First I created the GridBagConstraints object called layoutConst1.  The "layoutConst1.gridx = 0" and "layoutConst1.gridy = 0" sets the starting column at address 0 and the starting row at address 0, respectively.  The "layoutConst1.anchor = GridBagConstraints.LINE_START;"
+    line allows me to determine where, within the display area, I want to place my JComponent object, which is the First Line.  The "layoutConst1.insets = new Insets(10, 10, 10, 10)" allows me to set a small space of 10 pixels around the JComponent object and the window.  The " panel.add(enterHammingDist, layoutConst1);" allows me add the JLabel enterHammingDist to the panel and  position it
+    within my panel with layoutConst1.  Finally, the "add(panel)" line adds the panel to the JFrame.  Then, I will use this logic to position all the JComponents within the panel with GridBagConstraints objects.  The further left of the panel the JComponent is, the smaller the .gridx value, the further the right, the bigger the .gridx value gets.  Farther upper of the 
+    panel, the smaller the .gridy value, the lower the panel, the bigger the .gridy value.  For the buttons to perform actions when you click, I use the JButton.addActionListener((e) -> {} method for each of the Button.  For the first button, the "ShowStation" button, I first did showStation.addActionListener((e) ->{...}.  
+    + The line "String input = stations.getSelectedItem().toString();" creates a String called input and assigns the station that gets selected from the JComboBox stations converted to a String to that String input value.  This is the name of the station that gets selected from the dropdown box.   Then, the line "	int value = slider.getValue();" creates an int object called value that stores the value from the slider. 
+    The line "calculateNumberOfNodes(input)" calls the calculateNumberOfNodes method and pass input as the parameter, which is going to return the numbers of stations that is either of distance0, distance1, distace2, distance3, or distance4 from the input station and stores the returned int values in a int[] array. 
+    + The following code creates a String object called stations, then I made an ArrayList<String> stationNames, passed in the int value to the HashMap<String, Integer> stationsbhd and used stationsbhd.get(value) to return the string values that match the key of value.  The for loop then loops through the matching stations and add them to the String stations.  After the for loop, I will put all the matching stations in the JTextArea stationsList by the setText()method.
+    
+  				  String stations = "";
+				ArrayList<String> stationNames = stationsbhd.get(value);
+				int index = stationsbhd.get(value).size();
+				for (int x = 0; x < index; ++x )   {
+					stations = stations + stationNames.get(x) + "\n";
+				}
+				stationsList.setText(stations);
+				stationsList.setEditable(false);
+
+			});
+      
+      
+- int HammingDistance(String station1, String station2): create an int name count to keep track of the differences and initialize it to 0. Then create a for loop to step into each index of station1 (or station2) starting at index 0 (int index = 0). Next, inside an if statement, use the charAt() method on both station1 and station2 starting at index 0 to compare them. Each time they are not equal to one another, increment and update count. Then, return count.
+- int[] calculateNumberOfNodes (String station): create 5 int variables Distance0, Distance1, Distance2, Distance3, and Distance4 and initialize all of them to 0. Then, create an int variable named hold to keep track of each occurrence of the int variables above. Create a for loop starting at index 0 to step into each index of the WeatherStations ArrayList, then call the HammingDistance() method and assign it to hold: hold = HammingDistance(WeatherStations.get(x), station). Create 5 if-else if statements to increment distance 0 each time hold is 0, distance1 each time hold is 1, increment distance 2 each time hold is 2, increment distance3 each time hold is 3, and increment distance 4 each time hold is 4. Then, create an int[] array called Distance and initialize it with the five int variables Distance 0, Distance1, Distance2, Distance3, and Distance4. Finally, return int[] Distance.
+
+<img width="345" alt="UML" src="https://user-images.githubusercontent.com/46768240/57084512-0f6f8c00-6cc0-11e9-85f8-65ef9b1d3a07.PNG">
