@@ -305,6 +305,7 @@ public class HammingDistanceFrame extends JFrame {
 				stationsList.setEditable(false);
 			});
 		 
+		 //Actions to perform when CalculateHD button is clicked
 		 CalculateHD.addActionListener((e) -> {
 				String input = stations.getSelectedItem().toString();
 				Distance = calculateNumberOfNodes (input);
