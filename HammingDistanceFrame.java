@@ -41,7 +41,7 @@ import javax.swing.event.ChangeListener;
 
 public class HammingDistanceFrame extends JFrame {
 
-	
+	//initialize the panel
 	JPanel panel = new JPanel(new GridBagLayout());  
 	
 	
