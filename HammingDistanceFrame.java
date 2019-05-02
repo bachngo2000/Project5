@@ -101,7 +101,7 @@ public class HammingDistanceFrame extends JFrame {
 		BufferedReader br = new BufferedReader(new FileReader(Mesonet));
 		String stationIDs = br.readLine(); //read the 1st line
     	while (stationIDs != null)    {
-    		WeatherStations.add(stationIDs.substring(0,4)); //adding to WeatherStations starting from index 1 to index 4 (index 5 is excluded)
+    		WeatherStations.add(stationIDs.substring(0,4)); //adding to WeatherStations starting from index 0 to index 3 (index 5 is excluded)
     		stationIDs = br.readLine(); //keep reading the String
     		
     	}	
