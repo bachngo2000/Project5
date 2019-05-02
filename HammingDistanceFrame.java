@@ -290,7 +290,7 @@ public class HammingDistanceFrame extends JFrame {
 		 panel.add(stations,layoutConst10);
 		 add(panel);
 		
-		 //Actions to perform when ShowStation button
+		 //Actions to perform when ShowStation button is clicked
 		 showStation.addActionListener((e) -> {
 				String input = stations.getSelectedItem().toString();
 				int value = slider.getValue();
