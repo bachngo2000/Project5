@@ -199,6 +199,7 @@ public class HammingDistanceFrame extends JFrame {
 		 panel.add(stationsList, layoutConst4);
 		 add(panel);
 		 
+		 //position the compareWith JLabel
 		 GridBagConstraints layoutConst5 = new GridBagConstraints();
 		 layoutConst5.gridx = 0;
 		 layoutConst5.gridy = 7;
