@@ -282,6 +282,7 @@ public class HammingDistanceFrame extends JFrame {
 		 read("Mesonet.txt");
 		 stations = new JComboBox(WeatherStations.toArray());
 		 //stations.addActionListener(this);
+		 //position the JComboBox 
 		 GridBagConstraints layoutConst10 = new GridBagConstraints();
 		 layoutConst10.gridx = 1;
 		 layoutConst10.gridy = 7;
