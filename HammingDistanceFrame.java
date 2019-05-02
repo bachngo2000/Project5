@@ -20,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import javax.swing.ButtonGroup;
@@ -320,11 +321,11 @@ public class HammingDistanceFrame extends JFrame {
 		 //Actions to perform when AddStation button is clicked
 		 AddStation.addActionListener((e) -> {
 			 String input = addStationtf.getText();
-			 if(((DefaultComboBoxModel)stations.getModel()).getIndexOf(input) == -1) {
-				 stations.addItem(input);
-				}
+			 if(((DefaultComboBoxModel)stations.getModel()).getIndexOf(input) == -1) { 
+				int index = Collections.binarySearch(WeatherStations, input) * -1 - 1;       
+				 stations.insertItemAt(input, index);
 			 
-		 });
+		 }});
 		 
 		 /*GridBagConstraints newLayout = new GridBagConstraints();
 		 newLayout.gridx = 10;
