@@ -242,6 +242,7 @@ public class HammingDistanceFrame extends JFrame {
 			 add(panel);
 		 }
 		
+		 //add all the dist JLabels to distancetf
 		 distancetf.add(dist0);
 		 distancetf.add(dist1);
 		 distancetf.add(dist2);
