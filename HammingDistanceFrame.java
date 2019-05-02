@@ -231,6 +231,7 @@ public class HammingDistanceFrame extends JFrame {
 		 distLabel.add(d3);
 		 distLabel.add(d4);
 		 
+		 //using the for loop to position each of the distance JLabels
 		 for (int x = 0; x < distLabel.size(); ++x)   {
 			 GridBagConstraints jLabellayoutConstant = new GridBagConstraints();
 			 jLabellayoutConstant.gridx = 0;
